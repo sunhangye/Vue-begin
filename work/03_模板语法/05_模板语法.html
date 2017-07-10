@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_模板语法</title>
+</head>
+<body>
+<!--
+1. 表达式 :
+  语法: {{exp}} 或 {{{exp}}}
+  功能: 向页面输出数据
+  可以调用对象的方法
+2. 强制数据绑定:
+  完整写法:
+    v-bind:xxx='yyy'  //yyy会作为表达式解析执行
+  简洁写法:
+    :xxx='yyy'
+3. 事件监听:
+  完整写法:
+    v-on:keyup='xxx'
+    v-on:keyup='xxx(参数)'
+    v-on:keyup.enter='xxx'
+  简洁写法:
+    @keyup='xxx'
+    @keyup.enter='xxx'
+-->
+<div id="app">
+
+  <h2>1. 表达式</h2>
+  <p>{{message}}</p>
+  <p>{{message.toUpperCase()}}</p>
+  <h2>2. 强制数据绑定:</h2>
+  <a :href="url">尚硅谷</a>
+
+  <h2>3. 事件监听:</h2>
+  <input type="text" @keyup.enter="test">
+  <input type="text" @keyup.enter="test2($event, 'abc')">
+
+  <!--模板页面自动去vm对象中找属性-->
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  var vm = new Vue({
+    el : '#app',
+    data : {
+      message: 'atguigu.com',
+      url: 'http://www.atguigu.com'
+    },
+    methods : {
+      test (event) {
+        alert(event.target.value)
+      },
+      test2 (event, msg) {
+        alert(event.target.value + '----'+msg)
+      }
+    }
+  })
+  console.log(vm) // 数据代理(vm代理data中数据的操作(读/写))
+  vm.message = "xfzhang"
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>14_自定义指令</title>
+</head>
+<body>
+
+<!--
+1. 注册全局指令
+  Vue.directive('upper-text', function(el, binding){
+    el.innerHTML = binding.value.toupperCase();
+  })
+2. 注册局部指令
+  directives : {
+    'lower-text' : {
+        bind (el, binding) {
+          el.innerHTML = binding.value.toLowerCase()
+        }
+    }
+  }
+3. 使用指令:
+  v-my-directive='xxx'
+-->
+
+<div id="test">
+  <input type="text" v-focus>
+  <p v-upper-text="msg"></p>
+  <p v-lower-text="msg"></p>
+</div>
+
+<div id="test2">
+  <p v-upper-text="msg"></p>
+  <p v-lower-text="msg"></p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  // 注册全局指令
+  Vue.directive('focus', {
+    inserted (el) {
+      el.focus()
+    }
+  })
+
+  Vue.directive('upper-text', {
+    inserted (el, binding) {
+      el.innerHTML = binding.value.toUpperCase()
+    }
+  })
+
+  new Vue({
+    el : '#test',
+    data : {
+      msg: 'I Will Back'
+    },
+    directives : { // 局部指令
+      'lower-text' : {
+        bind (el, binding) {
+          el.innerHTML = binding.value.toLowerCase()
+        }
+      }
+    }
+  })
+
+  new Vue({
+    el : '#test2',
+    data : {
+      msg: 'I Will Go'
+    }
+  })
+</script>
+</body>
+</html>

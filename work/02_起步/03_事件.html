@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03_事件</title>
+</head>
+<body>
+<!--
+  1. 绑定监听的指令:
+    v-on:xxx="函数名或函数调用"
+    @xxx="函数名或函数调用"
+  2. 定义事件处理的函数:
+    methods : {
+      函数名 : function(){...}
+    }
+-->
+<div id="app"><!--就是mvvm中的view-->
+  <p>{{msg}}</p>
+  <!--<button v-on:click="reverse">倒序</button>-->
+  <button @click="reverse">倒序</button>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({ // vm对象
+    el : '#app',
+    data : { // 一般数据  model对象
+      msg: 'I Love You!'
+    },
+    methods: { // 事件回调函数
+      reverse () {
+        //this是Vue实例对象
+        this.msg = this.msg.split('').reverse().join('')
+      }
+    }
+  })
+</script>
+</body>
+</html>
